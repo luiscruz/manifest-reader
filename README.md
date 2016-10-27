@@ -4,8 +4,8 @@ Tool to analyse Android applications manifest.
 ## Usage
 
 ```bash
-$manifest_reader --help
-Usage: manifest_reader [OPTIONS] MANIFEST
+$manifest-reader --help
+Usage: manifest-reader [OPTIONS] MANIFEST
 
   Tool to read Android manifests.
 

@@ -9,6 +9,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        manifest_reader=manifest_reader:tool
+        manifest-reader=manifest_reader:tool
     ''',
 )
