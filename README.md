@@ -4,14 +4,15 @@ Tool to analyse Android applications manifest.
 ## Usage
 
 ```bash
-$manifest-reader --help
-Usage: manifest-reader [OPTIONS] MANIFEST
+Usage: manifest-reader [OPTIONS] INPUT
 
-  Tool to read Android manifests.
+  Tool to read Android manifests. Works with APK files.
 
 Options:
   --android-sdk-version  Retrieve Android SDK version.
   --package-name         Retrieve app's package name.
+  --version-name         Retrieve app's version name.
+  --xml / --apk          specify input type
   --help                 Show this message and exit.
 ```
 
