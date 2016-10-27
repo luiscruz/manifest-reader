@@ -18,5 +18,7 @@ Options:
 ## Install
 
 ```bash
+$git clone https://github.com/luiscruz/manifest-reader.git
+$cd manifest-reader
 $pip install .
 ```
