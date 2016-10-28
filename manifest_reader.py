@@ -20,10 +20,10 @@ def tool(attribute, xml, input):
         elif 'version-name' == attribute:
             click.echo(manifest_node.get('android:versionName'))
     else:
-        if not os.environ['ANDROID_HOME']:
+        if not os.environ.get('ANDROID_HOME'):
             click.secho('Environment variable ANDROID_HOME is not defined.', err=True,fg='red')
             raise click.Abort
-        aapk_output=check_output([os.environ['ANDROID_HOME']+"/build-tools/23.0.1/aapt", "dump","badging",input])
+        aapk_output=check_output([os.environ['ANDROID_HOME']+"/build-tools/"+get_latest_sdk_version()+"/aapt", "dump","badging",input])
         if 'package-name' == attribute:
             package_line = parse_aapk(aapk_output, 'package')
             click.echo(parse_aapk_attribute_line(package_line, 'name'))
@@ -47,3 +47,13 @@ def parse_aapk_attribute_line(aapk_line, attribute):
             this_attribute,this_value=splited
             if this_attribute == attribute:
                 return this_value.replace("'","")
+
+def get_latest_sdk_version():
+    if os.environ.get('ANDROID_SDK'):
+        return os.environ['ANDROID_SDK']
+    build_tools_dir = os.environ['ANDROID_HOME']+"/build-tools/"
+    return sorted(get_immediate_subdirectories(build_tools_dir))[-1]
+
+def get_immediate_subdirectories(a_dir):
+    return [name for name in os.listdir(a_dir)
+            if os.path.isdir(os.path.join(a_dir, name))]
