@@ -20,6 +20,9 @@ def tool(attribute, xml, input):
         elif 'version-name' == attribute:
             click.echo(manifest_node.get('android:versionName'))
     else:
+        if not os.environ['ANDROID_HOME']:
+            click.secho('Environment variable ANDROID_HOME is not defined.', err=True,fg='red')
+            raise click.Abort
         aapk_output=check_output([os.environ['ANDROID_HOME']+"/build-tools/23.0.1/aapt", "dump","badging",input])
         if 'package-name' == attribute:
             package_line = parse_aapk(aapk_output, 'package')
